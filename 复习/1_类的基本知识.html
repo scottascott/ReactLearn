@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>1_类的基本知识</title>
+</head>
+<body>
+	<script type="text/javascript">
+		class Person {
+			constructor(name, age) {
+				this.name = name
+				this.age = age
+			}
+			//一般方法
+			speak() {
+				console.log('我叫' + this.name + '，我今年' + this.age +'岁了')
+			}
+		}
+		var p1 = new Person("Jerry", 18)
+		var p2 = new Person("Tom", 19)
+
+		p1.speak();
+
+		//继承
+		class Student extends Person {
+			constructor(name, age, grade) {
+				super(name, age)
+				this.grade=grade
+			}
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-ReactLearn",
+      "appliesTo": "/",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-函数式组件",
+      "appliesTo": "02 React中定义组件/函数式组件.html",
+      "type": "launch"
+    }
+  ]
+}
