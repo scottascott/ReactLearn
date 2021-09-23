@@ -3,8 +3,10 @@
     "",
     "\\01 Hello World",
     "\\02 React中定义组件",
+    "\\03 组件实例的三大属性1-state",
+    "\\04 组件实例的三大属性2-props",
     "\\复习"
   ],
-  "SelectedNode": "\\02 React中定义组件\\类式组件.html",
+  "SelectedNode": "\\04 组件实例的三大属性2-props\\3 对props进行限制.html",
   "PreviewInSolutionExplorer": false
 }

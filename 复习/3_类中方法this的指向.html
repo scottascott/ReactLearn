@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title></title>
+</head>
+<body>
+    <script type="text/javascript">
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+            //一般方法
+            speak() {
+                console.log(this)
+            }
+        }
+        var p1 = new Person('Tom', 18)
+        p1.speak()
+        var x = p1.speak
+        x()
+    </script>
+</body >
+</html >

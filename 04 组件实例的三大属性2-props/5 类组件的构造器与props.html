@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title></title>
+</head>
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+    <script type="text/babel">
+        class Person extends React.Component{
+            constructor(props){
+                super(props)
+                console.log(this.props)
+            }
+            static propTypes={
+                name:PropTypes.string.isRequired,
+                sex:PropTypes.string,
+                age:PropTypes.number,
+            }
+            static defaultProps={
+                sex:"不男不女",
+                age:18
+            }
+            render(){
+                const{name,age,sex}=this.props
+                return(
+                    <ul>
+                        <li>姓名：{name}</li>
+                        <li>性别：{sex}</li>
+                        <li>年龄：{age}</li>
+                    </ul>
+                )
+            }
+        }
+
+        //2虚拟DOM渲染到真实DOM容器中
+        //const p1={name:"Susan"}
+        const p1={name:"Susan", sex:"女", age:18}
+        ReactDOM.render(<Person {...p1} />,document.getElementById('test1'))
+    </script>
+</body>
+</html>
