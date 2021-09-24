@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>高阶函数_函数柯里化</title>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+	<script type="text/babel">
+		class Login extends React.Component{
+			state={
+				username:'',
+				password:''
+			}
+			//#region
+			/*
+			高阶函数：
+			1，A接收参数是一个函数，A就是高阶函数
+			2，A返回值是一个函数，A就是高阶函数
+			常见高阶函数：
+			Promise() setTimeout() arr.map()
+			*/
+			//#endregion
+			saveFromData=(dataType)=>{
+				return (event)=>{
+					this.setState({[dataType]:event.target.value})
+				}
+			}
+
+			handleSubmit=(event)=>{
+				event.preventDefault()
+				const{username,password}=this.state
+				alert("用户名："+username+'密码：'+password)
+			}
+			render(){
+				return(
+					<form action="" onSubmit={this.handleSubmit}>
+						用户名：<input onChange={this.saveFromData("username")} type="text"/>
+						密码：<input onChange={this.saveFromData("password")} type="password"/>
+						<button>登录</button>
+					</form>
+				)
+			}
+		}
+		
+        ReactDOM.render(<Login/>,document.getElementById('test'))
+	</script>
+</body>
+</html>
