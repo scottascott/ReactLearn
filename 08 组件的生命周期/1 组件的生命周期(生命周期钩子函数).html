@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>组件的生命周期</title>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+	<script type="text/babel">
+		class Life extends React.Component{
+			state={opacity:1}
+			disappear=()=>{
+				//也可以在这里清空定时器
+				//clearInterval(this.timer)
+				ReactDOM.unmountComponentAtNode(document.getElementById("test"))
+			}
+			//组件挂载完毕
+			componentDidMount(){
+				this.timer=setInterval(() => {
+					rOpacity=this.state.opacity-0.1
+					this.setState({opacity:rOpacity<0?1:rOpacity})
+				}, 200);
+			}
+			//组件将要卸载
+			componentWillUnmount(){
+				clearInterval(this.timer)
+			}
+			render(){
+				return(
+					<div>
+						<h2 style={{opacity:this.state.opacity}}>React学不会怎么办</h2>
+						<button onClick={this.disappear}>不活了</button>	
+					</div>
+				)
+			}
+		}
+        ReactDOM.render(<Life/>,document.getElementById('test'))
+	</script>
+</body>
+</html>

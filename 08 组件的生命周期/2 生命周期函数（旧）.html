@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>2 生命周期函数（旧）</title>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+	<script type="text/babel">
+		/*最常见钩子：
+		1 componentDidMount() 做一些初始化的事，如：定时器，网络请求，订阅消息
+		2 componentWillUnmount() 做收尾的事，如：关闭定时器，取消订阅
+		3 render() 必须要有
+		*/
+		class Count extends React.Component{
+			constructor(props){
+				console.log("constructor")
+				super(props)
+				this.state={count:0}
+			}
+			add=()=>{
+				let {count}=this.state
+				this.setState({count:count+1})
+			}
+			unmount=()=>{
+				ReactDOM.unmountComponentAtNode(document.getElementById("test"))
+			}
+			force=()=>{
+				this.forceUpdate()
+			}
+			componentWillMount(){
+				console.log("componentWillMount")
+			}
+			componentDidMount(){
+				console.log("componentDidMount")
+			}
+			componentWillUnmount(){
+				console.log("componentWillUnmount")
+			}
+			componentWillReceiveProps(){
+				console.log("componentWillReceiveProps")
+			}
+			shouldComponentUpdate(){
+				console.log("shouldComponentUpdate")
+				return true
+			}
+			componentWillUpdate(){
+				console.log("componentWillUpdate")
+			}
+			componentDidUpdate(){
+				console.log("componentDidUpdate")
+			}
+			render(){
+				console.log("render")
+				return(
+					<div>
+						<h2>当前点击数：{this.state.count}</h2>
+						<button onClick={this.add}>点我加1</button>
+						<button onClick={this.unmount}>关闭</button>
+						<button onClick={this.force}>不更改状态state强制更新</button>
+					</div>
+				)
+			}
+		}
+		//父组件A
+		class A extends React.Component{
+			state={car:"奔驰"}
+			changeCar=()=>{
+				this.setState({car:"宝马"})
+			}
+			render(){
+				return(
+					<div>
+						<div>我是A</div>
+						<button onClick={this.changeCar}>换车</button>
+						<B carName={this.state.car}/>
+					</div>
+				)
+			}
+		}
+		//子组件B
+		class B extends React.Component{
+			componentWillReceiveProps(){//第一次不算，大家觉得名字应该是 componentWillReceiveNewProps
+				console.log("componentWillReceiveProps")
+			}
+			render(){
+				return(
+					<div>
+						<div>我是B,我接收到的车是：{this.props.carName}</div>
+					</div>
+				)
+			}
+		}
+		
+		ReactDOM.render(<A/>,document.getElementById("test"))
+	</script>
+</body>
+</html>

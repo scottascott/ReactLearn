@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>3 生命周期函数（新）</title>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+	<script type="text/babel">
+		/*
+		UNSAFE_componentWillMount
+		UNSAFE_componentWillReceiveProps
+		UNSAFE_componentWillUpdate
+		*/
+		class Count extends React.Component{
+			constructor(props){
+				console.log("constructor")
+				super(props)
+				this.state={count:0}
+			}
+			add=()=>{
+				let {count}=this.state
+				this.setState({count:count+1})
+			}
+			unmount=()=>{
+				ReactDOM.unmountComponentAtNode(document.getElementById("test"))
+			}
+			force=()=>{
+				this.forceUpdate()
+			}
+			static getDerivedStateFromProps(props,state){
+				console.log("getDerivedStateFromProps",props,state)
+				return null
+				//return props  //state 任何时候都取决于props才使用
+			}
+			getSnapshotBeforeUpdate(){
+				console.log("getSnapshotBeforeUpdate")
+				return "传给componentDidUpdate"
+			}
+			componentDidMount(){
+				console.log("componentDidMount")
+			}
+			componentWillUnmount(){
+				console.log("componentWillUnmount")
+			}
+			shouldComponentUpdate(){
+				console.log("shouldComponentUpdate")
+				return true
+			}
+			componentDidUpdate(preProps,preState,snapshot){
+				console.log("componentDidUpdate",preProps,preState,snapshot)
+			}
+			render(){
+				console.log("render")
+				return(
+					<div>
+						<h2>当前点击数：{this.state.count}</h2>
+						<button onClick={this.add}>点我加1</button>
+						<button onClick={this.unmount}>关闭</button>
+						<button onClick={this.force}>不更改状态state强制更新</button>
+					</div>
+				)
+			}
+		}
+		
+		ReactDOM.render(<Count name="Tom" count={100} />,document.getElementById("test"))
+	</script>
+</body>
+</html>
