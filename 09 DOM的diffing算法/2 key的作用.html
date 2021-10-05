@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title></title>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+	<script type="text/babel">
+		/*
+			index作为key可能的问题，（只是可能！）
+			1，对数据逆序添加，逆序删除会破坏顺序
+			2，包含输入类DOM，会产生错误DOM更新
+			3，如果不做逆序添加，逆序删除，一般没有问题
+
+			开发中如何选择KEY？
+			1，最好使用唯一标识，如ID，身份证，手机号，学生号
+			2，简单操作用index也是可以的
+		*/
+		class Person extends React.Component{
+			state={
+				persons:[
+					{id:1,name:"小张",age:18},
+					{id:2,name:"小李",age:19}
+				]
+			}
+			add=()=>{
+				this.setState({persons:[{id:3,name:"小王",age:17},...this.state.persons]})
+			}
+			render(){
+				return(
+					<div>
+						<button onClick={this.add}>添加小王</button>
+						<h3>使用index作为key</h3>
+						<ul>
+							{this.state.persons.map((personObj,index)=>{
+								return <li key={index}>{personObj.name},{personObj.age}<input type="text"/></li>
+							})}
+						</ul>
+						<h3>使用数据的id作为key</h3>
+						<ul>
+							{this.state.persons.map((personObj)=>{//如果用index作为key的话，每次更新新数据可能是key为0 这样所有数据要重新渲染，只有key和内容一样时虚拟DOM的已有内容才不更新
+								return <li key={personObj.id}>{personObj.name},{personObj.age}<input type="text"/></li>
+							})}
+						</ul>
+					</div>
+				)
+			}
+		}
+		ReactDOM.render(<Person/>,document.getElementById("test"))
+	</script>
+</body>
+</html>
