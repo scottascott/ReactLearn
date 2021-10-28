@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {nanoid} from 'nanoid'
-import {addPerson} from '../../redux/actions/person.js'
+import {createAddPersonAction} from '../../redux/actions/person.js'
 class Person extends Component {
     addPerson=()=>{
         const name=this.nameNode.value
         const age=this.ageNode.value*1
         const personObj={id:nanoid(),name,age}
-        this.props.addPerson(personObj)
+        this.props.addP(personObj)
     }
     render() {
         return (
@@ -32,7 +32,7 @@ class Person extends Component {
 export default connect(
     state=>({personInfo:state.personInfo}),
     {
-        addPerson,
+        addP:createAddPersonAction,
     }
 )(Person)
 

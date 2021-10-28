@@ -1,10 +1,9 @@
-import {createStore,combineReducers} from 'redux'
-import countReducer from './reducers/count.js'
-import person_reducer from './reducers/person.js'
+import {createStore} from 'redux'
+import {composeWithDevTools} from 'redux-devtools-extension'
+import allReducers from './reducers'
 
-const allReducers=combineReducers({
-    count:countReducer,
-    personInfo:person_reducer,
-})
 
-export default createStore(allReducers)
+
+
+export default createStore(allReducers,composeWithDevTools())
+// export default createStore(allReducers,composeWithDevTools(applyMiddleware(thunk)))
