@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Demo from './components/2 lazyLoad';
+import Demo from './components/10 Error boundary';
 
 
 class App extends Component {

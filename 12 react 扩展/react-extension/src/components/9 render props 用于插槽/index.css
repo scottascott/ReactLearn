@@ -1,0 +1,15 @@
+.parent{
+    width: 500px;
+    background-color: aqua;
+    padding: 5px;
+}
+.A{
+    width: 100%;
+    background-color: orange;
+    padding: 5px;
+}
+.B{
+    width: 100%;
+    background-color: orangered;
+    padding: 5px;
+}
